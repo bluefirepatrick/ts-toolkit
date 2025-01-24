@@ -333,6 +333,7 @@ export class ColumnSnapper extends Snapper {
 
         comms.register("go_text", ColumnSnapper.moduleName, (data: unknown | unknown[], ack) => {
             let cssSelector = undefined;
+            console.log("PK DEBUG go_text data:", data);
             if(Array.isArray(data)) {
                 if(data.length > 1)
                     // Second element is presumed to be the CSS selector
@@ -340,6 +341,7 @@ export class ColumnSnapper extends Snapper {
                 data = data[0]; // First element will always be the locator text object
             }
             const text = LocatorText.deserialize(data);
+            console.log("PK DEBUG go_text test:", text);
             const r = rangeFromLocator(this.wnd.document, new Locator({
                 href: wnd.location.href,
                 type: "text/html",

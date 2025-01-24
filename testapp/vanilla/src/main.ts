@@ -22,7 +22,7 @@ async function load() {
         publicationURL = book;
         if(!book.endsWith("manifest.json") && !book.endsWith("/")) publicationURL += "/";
     } else
-        publicationURL = `${currentURL.origin}/books/${book}/manifest.json`
+        publicationURL = "http://localhost:15080/bW9ieS1kaWNrLmVwdWI/manifest.json"
 
     const container: HTMLElement = document.body.querySelector("#container") as HTMLElement;
     const manifestLink = new Link({ href: "manifest.json" });
@@ -132,6 +132,19 @@ async function load() {
                         break;
                     case "settings":
                         (document.getElementById("settings-dialog") as HTMLDialogElement).show();
+                        break;
+                    case "locator":
+                        console.log("Locator");
+                        const locatorData = {
+                            href: "OPS/chapter_054.xhtml",
+                            type: "application/xhtml+xml",
+                            "locations": {
+                                "progression": 0.750
+                            },
+                            text: {after: "!", before: "ye", highlight: "villains" }
+                        };
+                        const myLocator = Locator.deserialize(locatorData);
+                        nav.go(myLocator! , true, () => {});
                         break;
                     case "toc":
                         // Seed TOC

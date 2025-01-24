@@ -291,6 +291,7 @@ export class TextRange {
     const range = new Range();
     range.setStart(start.node, start.offset);
     range.setEnd(end.node, end.offset);
+    console.log("PK DEBUG text-range.ts range:", range);
     return range;
   }
 

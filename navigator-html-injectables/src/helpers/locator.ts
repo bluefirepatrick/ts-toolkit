@@ -11,6 +11,7 @@ export function rangeFromLocator(doc: Document, locator: Locator) {
     try {
         const locations = locator.locations;
         const text = locator.text;
+        console.log("PK DEBUG locator.ts text:", text);
         if (text && text.highlight) {
             let root;
             if (locations && locations.getCssSelector()) {
@@ -19,12 +20,13 @@ export function rangeFromLocator(doc: Document, locator: Locator) {
             if (!root) {
                 root = doc.body;
             }
-
+            console.log("PK DEBUG locator.ts text.before:", text.before);
             const anchor = new TextQuoteAnchor(root, text.highlight, {
                 prefix: text.before,
                 suffix: text.after,
             });
             try {
+                console.log("PK DEBUG locator.ts anchor:", anchor);
                 return anchor.toRange();
             } catch (error) {
                 // We don't watch to "crash" when the quote is not found
